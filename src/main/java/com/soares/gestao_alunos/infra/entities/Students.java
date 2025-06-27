@@ -3,7 +3,7 @@ package com.soares.gestao_alunos.infra.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -39,6 +39,9 @@ public class Students {
     @Column(name = "email")
     @NotBlank(message = "O email não pode estar vazio")
     private String email;
+
+    @Column(name = "registration_date", nullable = false, updatable = false)
+    private LocalDate registrationDate;
 
     @Embedded
     private Address address;
