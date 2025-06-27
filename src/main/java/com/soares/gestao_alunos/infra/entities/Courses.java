@@ -1,6 +1,7 @@
 package com.soares.gestao_alunos.infra.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Date;
@@ -10,27 +11,17 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "alunos")
+@Table(name = "courses")
 @Entity
-public class Alunos {
+public class Courses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
+    @Column(name = "name")
+    private String name;
 
-    private String lastName;
-
-    private Date dateBirth;
-
-    private String cpf;
-
-    private String gender;
-
-    private String email;
-
-    @Embeddable
-    private Endereco endereco();
-
+    @Column(name = "dateCourse")
+    private Date dateCourse;
 }
