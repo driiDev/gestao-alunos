@@ -1,0 +1,9 @@
+ALTER TABLE students
+    ADD COLUMN cep VARCHAR(10),
+    ADD COLUMN country VARCHAR(50),
+    ADD COLUMN state VARCHAR(100),
+    ADD COLUMN city VARCHAR(100),
+    ADD COLUMN district VARCHAR(100),
+    ADD COLUMN street VARCHAR(100),
+    ADD COLUMN number_house VARCHAR(20),
+    ADD COLUMN complement VARCHAR(100);
