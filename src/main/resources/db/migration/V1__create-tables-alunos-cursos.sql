@@ -6,7 +6,7 @@ CREATE TABLE students(
     cpf VARCHAR(11) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     gender VARCHAR(30)
-    registration_date NOT NULL
+    registration_date DATE NOT NULL
 )
 
 CREATE TABLE courses(
