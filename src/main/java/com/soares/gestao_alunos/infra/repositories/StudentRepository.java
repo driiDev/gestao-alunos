@@ -1,13 +1,12 @@
 package com.soares.gestao_alunos.infra.repositories;
 
-import com.soares.gestao_alunos.infra.entities.Students;
+import com.soares.gestao_alunos.infra.entities.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface StudentRepository extends JpaRepository<Students, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-
-    List<Students>findByName(String name);
+    List<Student>findByName(String name);
 
 }
