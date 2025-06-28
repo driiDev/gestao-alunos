@@ -6,6 +6,7 @@ import com.soares.gestao_alunos.services.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<Void> saveStudent(@Valid @RequestBody Student student){
         studentService.saveStudent(student);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -44,7 +45,7 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudentById(@Valid @PathVariable Integer id){
         studentService.deleteStudent(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }
