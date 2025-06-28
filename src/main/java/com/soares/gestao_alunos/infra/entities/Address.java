@@ -33,7 +33,7 @@ public class Address {
     @Column(name = "street")
     private String street;
 
-    @Column(name = "numberHouse")
+    @Column(name = "number_house")
     @NotBlank(message = "O numero não pode estar vazio")
     private String numberHouse;
 
