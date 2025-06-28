@@ -18,8 +18,8 @@ public class CourseService {
     }
 
     @Transactional
-    public Course saveCourse(Course course){
-        return courseRepository.save(course);
+    public void saveCourse(Course course){
+        courseRepository.save(course);
     }
 
     public Optional<Course> findCourseById(Integer id) {
@@ -29,8 +29,9 @@ public class CourseService {
     public List<Course> findAllCourses(){
         return courseRepository.findAll();
     }
+
     public List<Course> findByCourseName(String courseName){
-        return courseRepository.findByCourseNameIgnoreCase(courseName);
+        return courseRepository.findByCourseNameContainingIgnoreCase(courseName);
     }
 
     @Transactional
