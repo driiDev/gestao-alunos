@@ -22,7 +22,7 @@ public class StudentService {
     }
 
     public List<Student> findByFirstName(String firstName){
-        return studentRepository.findByFirstNameIgnoreCase(firstName);
+        return studentRepository.findByFirstNameContainingIgnoreCase(firstName);
     }
 
     public List<Student> findAllStudents(){
