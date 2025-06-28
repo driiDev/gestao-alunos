@@ -2,9 +2,8 @@ package com.soares.gestao_alunos.infra.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -13,15 +12,20 @@ import java.util.Date;
 @Builder
 @Table(name = "courses")
 @Entity
-public class Courses {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "course_name", unique = true)
+    @NotBlank
+    private String courseName;
 
-    @Column(name = "dateCourse")
-    private Date dateCourse;
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "course_duration")
+    @NotNull
+    private double courseDuration;
 }
