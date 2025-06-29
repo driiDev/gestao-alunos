@@ -62,6 +62,18 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findAllStudents());
     }
 
+    @GetMapping("/{studentId}/enrollments")
+    public ResponseEntity<List<Enrollment>> findStudentEnrollments(@PathVariable Integer studentId){
+        var student = studentRepository.findById(studentId);
+
+        if(student.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        var enrollments = enrollmentRepository.findByStudentId(studentId);
+        return ResponseEntity.ok(enrollments);
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateStudentById(@Valid @PathVariable Integer id, @RequestBody Student student){
         studentService.updateStudentById(id, student);
