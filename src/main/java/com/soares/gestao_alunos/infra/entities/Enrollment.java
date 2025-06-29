@@ -1,5 +1,6 @@
 package com.soares.gestao_alunos.infra.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,6 +23,7 @@ public class Enrollment {
     @ManyToOne
     @JoinColumn(name = "student_id")
     @NotNull
+    @JsonIgnore
     private Student student;
 
     @ManyToOne
