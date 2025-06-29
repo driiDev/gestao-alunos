@@ -48,4 +48,9 @@ public class CourseController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCourseById(@Valid @PathVariable Integer id){
+        courseService.deleteCourse(id);
+        return ResponseEntity.noContent().build();
+    }
 }
