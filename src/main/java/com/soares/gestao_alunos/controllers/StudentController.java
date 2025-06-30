@@ -9,12 +9,9 @@ import com.soares.gestao_alunos.infra.repositories.StudentRepository;
 import com.soares.gestao_alunos.services.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,7 +21,6 @@ public class StudentController {
 
     private final StudentService studentService;
     private final StudentRepository studentRepository;
-    private final CourseRepository courseRepository;
     private final EnrollmentRepository enrollmentRepository;
 
     @PostMapping
@@ -65,6 +61,12 @@ public class StudentController {
         studentService.updateStudentById(id, student);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/{studentId}/enroll/{enrollmentId}/status")
+        public ResponseEntity<Void> updateEnrollmentStatus(@Valid @PathVariable Integer studentId, @PathVariable Integer enrollmentId, @RequestParam CourseStatus newStatus){
+            studentService.updateEnrollmentStatus(studentId, enrollmentId, newStatus);
+            return ResponseEntity.ok().build();
+        }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudentById(@Valid @PathVariable Integer id){

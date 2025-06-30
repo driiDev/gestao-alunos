@@ -19,7 +19,6 @@ import java.util.Optional;
 public class CourseController {
 
     private final CourseService courseService;
-    private final CourseRepository courseRepository;
 
     @PostMapping
     public ResponseEntity<Void> saveCourse(@Valid @RequestBody Course course){

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -86,6 +87,22 @@ public class StudentService {
 
         existingStudent.setGender(student.getGender() != null
                 ? student.getGender() : existingStudent.getGender());
+    }
+
+    public void updateEnrollmentStatus(Integer studentId, Integer enrollmentId, CourseStatus newCourseStatus){
+        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new NoSuchElementException("Matrícula não encontrada."));
+
+        if (!enrollment.getStudent().getId().equals(studentId)){
+            throw new IllegalStateException("Matrícula não pertence ao aluno");
+        }
+
+        if (enrollment.getStatus() == CourseStatus.COMPLETED && newCourseStatus == CourseStatus.IN_PROGRESS){
+            throw new IllegalStateException("Não é possível alterar o status de uma matrícula concluida para em progresso");
+        }
+
+        enrollment.setStatus(newCourseStatus);
+        enrollmentRepository.save(enrollment);
     }
 
 }
