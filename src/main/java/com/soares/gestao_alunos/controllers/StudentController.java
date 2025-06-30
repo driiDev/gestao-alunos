@@ -34,21 +34,7 @@ public class StudentController {
     }
     @PostMapping("/{studentId}/enroll/{courseId}")
     public ResponseEntity<Void> enrollStudent(@PathVariable Integer studentId, @PathVariable Integer courseId){
-        var student = studentRepository.findById(studentId);
-        var course = courseRepository.findById(courseId);
-
-        if(student.isEmpty() || course.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-
-        var enrollment = new Enrollment();
-        enrollment.setStudent(student.get());
-        enrollment.setCourse(course.get());
-        enrollment.setEnrollmentDate(LocalDate.now());
-        enrollment.setStatus(CourseStatus.IN_PROGRESS);
-
-        enrollmentRepository.save(enrollment);
-
+        studentService.enrollStudent(studentId, courseId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
