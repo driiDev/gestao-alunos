@@ -56,6 +56,10 @@ public class StudentService {
     public List<Student> findAllStudents(){
         return studentRepository.findAll();
     }
+    public Student findStudentById(Integer id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+    }
 
     @Transactional
     public void deleteStudent(Integer id){
