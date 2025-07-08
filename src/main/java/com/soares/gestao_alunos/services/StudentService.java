@@ -71,8 +71,8 @@ public class StudentService {
 
     @Transactional
     public void updateStudentById(Integer id, Student student){
-        Student existingStudent = studentRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Aluno não encontrado"));
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 
         existingStudent.setFirstName(student.getFirstName() != null
                 ? student.getFirstName() : existingStudent.getFirstName());
@@ -91,7 +91,28 @@ public class StudentService {
 
         existingStudent.setGender(student.getGender() != null
                 ? student.getGender() : existingStudent.getGender());
+
+        if (student.getAddress() != null) {
+            if (existingStudent.getAddress() == null) {
+                existingStudent.setAddress(student.getAddress());
+            } else {
+                var newAddress = student.getAddress();
+                var oldAddress = existingStudent.getAddress();
+
+                oldAddress.setCep(newAddress.getCep() != null ? newAddress.getCep() : oldAddress.getCep());
+                oldAddress.setCountry(newAddress.getCountry() != null ? newAddress.getCountry() : oldAddress.getCountry());
+                oldAddress.setStreet(newAddress.getStreet() != null ? newAddress.getStreet() : oldAddress.getStreet());
+                oldAddress.setDistrict(newAddress.getDistrict() != null ? newAddress.getDistrict() : oldAddress.getDistrict());
+                oldAddress.setNumberHouse(newAddress.getNumberHouse() != null ? newAddress.getNumberHouse() : oldAddress.getNumberHouse());
+                oldAddress.setComplement(newAddress.getComplement() != null ? newAddress.getComplement() : oldAddress.getComplement());
+                oldAddress.setCity(newAddress.getCity() != null ? newAddress.getCity() : oldAddress.getCity());
+                oldAddress.setState(newAddress.getState() != null ? newAddress.getState() : oldAddress.getState());
+            }
+        }
+
+        studentRepository.save(existingStudent);
     }
+
 
     public void updateEnrollmentStatus(Integer studentId, Integer enrollmentId, CourseStatus newCourseStatus){
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
